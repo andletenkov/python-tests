@@ -1,9 +1,10 @@
 FROM python:3.8.3
 
-RUN pip install virtualenv \
-  && virtualenv virtenv \
-  && . virtenv/bin/activate \
-  && pip install \
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+RUN pip install \
     pika==0.12.0 \
     pytest==5.3.5 \
     psycopg2-binary==2.8.4 \
